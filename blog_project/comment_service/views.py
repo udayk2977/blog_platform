@@ -30,9 +30,7 @@ class CommentCreateView(generics.CreateAPIView):
 
 
 class CommentListView(generics.ListAPIView):
-    """
-    GET /comments?post_id=<id>
-    """
+
     serializer_class = CommentSerializer
     permission_classes = [permissions.AllowAny]
 
