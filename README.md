@@ -126,6 +126,9 @@ Each service uses environment variables to communicate:
 - **Containerization**: Docker
 
 ---
+## **Admin Credentials**
+- **Username**: admin
+- **Password**: 1234
 
 ## **API Documentation**
 Refer to the API Documentation for detailed information on available endpoints and usage.
