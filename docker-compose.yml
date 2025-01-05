@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  # User Service Database
+  user_db:
+    image: postgres:13
+    container_name: user_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: WttIAuqJOXLVqDHLzNQrFdChrErYhoyB
+      POSTGRES_DB: railway
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  # Blog Service Database
+  blog_db:
+    image: postgres:13
+    container_name: blog_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: uoghtIwkgQsAmIsvncZGbYdzBgZYvqll
+      POSTGRES_DB: railway
+    volumes:
+      - blog_db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  # Comment Service Database
+  comment_db:
+    image: postgres:13
+    container_name: comment_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: KuzwbjHpcSYzbgxQAYzjeJNMJzTYUMhg
+      POSTGRES_DB: railway
+    volumes:
+      - comment_db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  # User Service
+  user_service:
+    build:
+      context: ./user_service
+    container_name: user_service
+    environment:
+      - DATABASE_URL=postgresql://postgres:WttIAuqJOXLVqDHLzNQrFdChrErYhoyB@viaduct.proxy.rlwy.net:37906/railway
+    ports:
+      - "8001:8001"
+    depends_on:
+      - user_db
+    networks:
+      - app_network
+
+  # Blog Service
+  blog_service:
+    build:
+      context: ./blog_service
+    container_name: blog_service
+    environment:
+      - DATABASE_URL=postgresql://postgres:uoghtIwkgQsAmIsvncZGbYdzBgZYvqll@autorack.proxy.rlwy.net:55576/railway
+      - USER_SERVICE_URL=http://user_service:8001
+    ports:
+      - "8002:8002"
+    depends_on:
+      - blog_db
+      - user_service
+    networks:
+      - app_network
+
+  # Comment Service
+  comment_service:
+    build:
+      context: ./comment_service
+    container_name: comment_service
+    environment:
+      - DATABASE_URL=postgresql://postgres:KuzwbjHpcSYzbgxQAYzjeJNMJzTYUMhg@autorack.proxy.rlwy.net:18994/railway
+      - USER_SERVICE_URL=http://user_service:8001
+      - BLOG_SERVICE_URL=http://blog_service:8002
+    ports:
+      - "8003:8003"
+    depends_on:
+      - comment_db
+      - user_service
+      - blog_service
+    networks:
+      - app_network
+
+# Volumes for persistent storage
+volumes:
+  user_db_data:
+  blog_db_data:
+  comment_db_data:
+
+# Shared network for inter-service communication
+networks:
+  app_network:
