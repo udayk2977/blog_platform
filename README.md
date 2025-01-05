@@ -128,9 +128,9 @@ Each service uses environment variables to communicate:
 ---
 
 ## **API Documentation**
-Refer to the [API Documentation](API_DOCUMENTATION.md) for detailed information on available endpoints and usage.
+Refer to the [API Documentation](API_Documentation.docs) for detailed information on available endpoints and usage.
 
 ---
 
 ## **Contact**
-For any issues, please contact [your-email@example.com](mailto:your-email@example.com).
+For any issues, please contact [iit2022023@iiita.ac.in](mailto:iit2022023@iiita.ac.in).
