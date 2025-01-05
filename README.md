@@ -128,7 +128,7 @@ Each service uses environment variables to communicate:
 ---
 
 ## **API Documentation**
-Refer to the [API Documentation](API_Documentation.docs) for detailed information on available endpoints and usage.
+Refer to the API Documentation for detailed information on available endpoints and usage.
 
 ---
 
