@@ -21,7 +21,7 @@ This project is a multi-service application for managing users, blogs, and comme
 - Blog creation, editing, and deletion by authenticated users.
 - Adding and listing comments on blogs.
 - RESTful API design with JWT-based authentication.
-- Scalable deployment using Vercel and Railway.
+- Scalable deployment using Vercel and Railway platforms.
 
 ---
 
